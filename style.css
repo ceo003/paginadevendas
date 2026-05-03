@@ -95,6 +95,11 @@ li {
   transform: scale(1.03);
 }
 
+.btn-footer {
+  background: #10b981;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
 .testimonials {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
