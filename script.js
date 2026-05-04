@@ -50,4 +50,12 @@ window.onload = function () {
   const display = document.querySelector('#timer');
   startTimer(twoHours, display);
   startLiveCounter();
+
+  // Tentar forçar o autoplay com som
+  const video = document.getElementById('hero-video');
+  if (video) {
+    video.play().catch(error => {
+      console.log("Autoplay com som bloqueado pelo navegador. O usuário precisa interagir primeiro.");
+    });
+  }
 };
