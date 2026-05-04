@@ -180,8 +180,6 @@ li {
   text-decoration: underline;
 }
 
-footer {
-
 .testimonials {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -281,10 +279,49 @@ footer {
 
 @media (max-width: 600px) {
   .hero h1 {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
+    padding: 0 10px;
+  }
+
+  .container {
+    padding: 10px;
+  }
+
+  .card {
+    padding: 20px;
   }
 
   .new-price {
     font-size: 2.3rem;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+    padding: 14px 20px;
+  }
+
+  .payment-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .payment-buttons .btn {
+    margin-top: 0;
+  }
+
+  .video-container {
+    margin: 15px 0;
+    border-radius: 8px;
+  }
+
+  .promo-bar {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  #timer {
+    display: inline-block;
+    margin-top: 5px;
   }
 }
