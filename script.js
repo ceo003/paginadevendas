@@ -33,8 +33,21 @@ function startTimer(duration, display) {
   }, 1000);
 }
 
+// Live Viewers Counter
+function startLiveCounter() {
+  const countElement = document.getElementById('live-count');
+  if (!countElement) return;
+
+  setInterval(() => {
+    // Generate a random number between 46 and 48
+    const newCount = Math.floor(Math.random() * (48 - 46 + 1)) + 46;
+    countElement.textContent = newCount;
+  }, 3000); // Update every 3 seconds
+}
+
 window.onload = function () {
   const twoHours = 60 * 60 * 2;
   const display = document.querySelector('#timer');
   startTimer(twoHours, display);
+  startLiveCounter();
 };
