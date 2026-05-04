@@ -139,13 +139,31 @@ li {
 
 .live-viewers {
   background: rgba(0, 0, 0, 0.4);
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 8px 15px;
-  border-radius: 20px;
+  padding: 12px 15px;
+  border-radius: 12px;
   font-size: 0.9rem;
   margin-top: 15px;
   font-weight: bold;
+  gap: 10px;
+}
+
+.live-info {
+  display: flex;
+  align-items: center;
+}
+
+.btn-live-buy {
+  background: #16a34a;
+  color: white;
+  text-decoration: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  animation: pulse 1.5s infinite;
+  box-shadow: 0 4px 10px rgba(22, 163, 74, 0.4);
 }
 
 .live-viewers .dot {

@@ -39,8 +39,8 @@ function startLiveCounter() {
   if (!countElement) return;
 
   setInterval(() => {
-    // Generate a random number between 46 and 48
-    const newCount = Math.floor(Math.random() * (48 - 46 + 1)) + 46;
+    // Generate a random number between 157 and 163
+    const newCount = Math.floor(Math.random() * (163 - 157 + 1)) + 157;
     countElement.textContent = newCount;
   }, 3000); // Update every 3 seconds
 }
