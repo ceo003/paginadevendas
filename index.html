@@ -51,7 +51,7 @@
       <!-- Estado Inicial -->
       <div id="inicio-fluxo">
         <h2 style="color: #065f46;">Adquirir a Receita Especial</h2>
-        <p>Clique no botão abaixo para iniciar o processo e receber sua receita.</p>
+        <p>Clique no botão abaixo para iniciar o processo e receber a receita.</p>
         <button onclick="iniciarQuestionario()" class="btn" style="background: #10b981; width: 100%; max-width: 400px;">ADQUIRIR RECEITA</button>
       </div>
 
@@ -95,18 +95,26 @@
         </div>
 
         <div id="quiz-resultado" class="quiz-step" style="display: none; text-align: center;">
-          <p style="font-size: 1.1rem; margin-bottom: 20px; line-height: 1.4; color: #1f2937; font-weight: bold;">
-            Pelas suas respostas, já está num nível onde precisa de ajuda mesmo.<br>
-            Esta receita foi criada exatamente para esse tipo de caso, irá ajudar muito você.
-          </p>
+          <div class="emotional-result">
+            <p>
+              Pelas suas respostas, já está num nível onde precisa de ajuda mesmo.<br>
+              Esta receita foi criada exatamente para esse tipo de caso, irá ajudar muito você.
+            </p>
+          </div>
           <button onclick="mostrarPagamento()" class="btn" style="width: 100%; max-width: 400px;">Quero a receita agora</button>
         </div>
       </div>
 
       <!-- Pagamento (Inicia Oculto) -->
       <div id="pagamento-fluxo" style="display: none;">
-        <h2 style="color: #065f46;">Escolha a forma de pagamento</h2>
-        <p>O envio é imediato após a confirmação.</p>
+        <h2 style="color: #065f46;"> O envio é imediato após o pagamento </h2>
+        
+        <div class="price-display" style="margin: 15px 0;">
+          <span class="old-price" style="font-size: 1.2rem; text-decoration: line-through; color: #777;">500 MT</span>
+          <div class="new-price" style="font-size: 2.5rem; color: #047857; font-weight: bold; margin: 5px 0;">245 MT</div>
+        </div>
+
+        <p> Escolha o metodo de pagamento :</p>
         <div class="payment-buttons">
           <button onclick="fazerPagamento('emola')" class="btn-payment-icon">
             <img src="emolaIcone.png" alt="Pagar com e-Mola">
