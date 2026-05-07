@@ -27,8 +27,8 @@ export default async function handler(req, res) {
         amount: "245.00",
         reference: `REC${Date.now()}`,
         description: "Receita do Cha Natural",
-        method: metodoMap[method] || method, // Mapeia para o formato correto
-        return_url: "https://lojasolucion.online/" // Adicionada a barra no final para garantir formato de URL
+        method: metodoMap[method] || method
+        // return_url removido temporariamente para teste de diagnóstico
       })
     });
 
