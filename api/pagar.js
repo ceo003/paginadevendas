@@ -26,9 +26,11 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         amount: "245.00",
         reference: `REC${Date.now()}`,
-        description: "Receita do Cha Natural",
+        description: "Compra da Receita do Cha Natural",
         method: metodoMap[metodo] || metodo,
-        return_url: "https://lojasolucion.online/obrigado.html"
+        // Usando o formato escapado conforme exemplo da documentação PHP
+        return_url: "https:\/\/lojasolucion.online\/obrigado.html",
+        callback_url: "https:\/\/lojasolucion.online\/api\/webhook"
       })
     });
 
