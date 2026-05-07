@@ -14,6 +14,11 @@ export default async function handler(req, res) {
       });
     }
 
+    // Pegar dados do corpo da requisição
+    const { method } = req.body || {};
+    // Gerar referência única
+    const reference = `REC${Date.now()}`;
+
     // Identificar o host automaticamente (funciona no .online ou no link da Vercel)
     const host = req.headers.host;
     const protocol = host.includes('localhost') ? 'http' : 'https';
@@ -27,6 +32,8 @@ export default async function handler(req, res) {
       return_url: `${baseUrl}/obrigado.html`,
       callback_url: `${baseUrl}/api/webhook`
     };
+
+    console.log("Chamando PaySuite com baseUrl:", baseUrl);
 
     const response = await fetch("https://paysuite.tech/api/v1/payments", {
       method: "POST",
@@ -51,7 +58,7 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error(error);
+    console.error("Erro na API de Pagamento:", error.message);
     return res.status(500).json({
       error: error.message
     });
