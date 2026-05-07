@@ -27,7 +27,7 @@ export default async function handler(req, res) {
         amount: "245.00",
         reference: `REC${Date.now()}`,
         description: "Compra da Receita do Cha Natural",
-        method: metodoMap[metodo] || metodo,
+        method: metodoMap[method] || method,
         // Usando o formato escapado conforme exemplo da documentação PHP
         return_url: "https:\/\/lojasolucion.online\/obrigado.html",
         callback_url: "https:\/\/lojasolucion.online\/api\/webhook"
@@ -39,9 +39,11 @@ export default async function handler(req, res) {
     if (data.status === 'success') {
       return res.status(200).json({ checkout_url: data.data.checkout_url });
     } else {
+      console.error('Erro na resposta do PaySuite:', data);
       return res.status(400).json({ error: data.message || 'Erro ao gerar pagamento.' });
     }
   } catch (error) {
+    console.error('Erro fatal na API de pagamento:', error);
     return res.status(500).json({ error: 'Erro de conexão com o gateway.' });
   }
 }
