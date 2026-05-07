@@ -6,6 +6,11 @@ export default async function handler(req, res) {
   const { method } = req.body; // 'mpesa' ou 'emola'
   const token = process.env.PAYSUITE_TOKEN; // Você configurará isso no Vercel
 
+  const metodoMap = {
+    'mpesa': 'mpesa',
+    'emola': 'emola'
+  };
+
   if (!token) {
     return res.status(500).json({ error: 'Token da API não configurado no servidor.' });
   }
@@ -22,8 +27,8 @@ export default async function handler(req, res) {
         amount: "245.00",
         reference: `REC${Date.now()}`,
         description: "Receita do Cha Natural",
-        method: method,
-        return_url: "https://lojasolucion.online" // Alterado para a raiz do site para teste de validação
+        method: metodoMap[method] || method, // Mapeia para o formato correto
+        return_url: "https://lojasolucion.online/" // Adicionada a barra no final para garantir formato de URL
       })
     });
 
