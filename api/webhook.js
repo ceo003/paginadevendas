@@ -48,7 +48,8 @@ export default async function handler(req, res) {
       const payment = data.data;
       console.log(`PAGAMENTO APROVADO: Referência ${payment.reference}`);
       
-      // Aqui você pode adicionar lógica para disparar e-mails, etc.
+      // Notificação Telegram
+      await sendTelegramNotification(payment);
     }
 
     return res.status(200).send("OK");
@@ -56,5 +57,42 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error("Erro no Webhook:", error.message);
     return res.status(500).send(error.message);
+  }
+}
+
+async function sendTelegramNotification(payment) {
+  const token = process.env.TELEGRAM_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+
+  if (!token || !chatId) {
+    console.error("Telegram Token ou Chat ID não configurado!");
+    return;
+  }
+
+  const message = `
+✅ *Nova Venda Aprovada!*
+━━━━━━━━━━━━━━━━━━
+💰 *Valor:* ${payment.amount} ${payment.currency || 'MZN'}
+📝 *Descrição:* ${payment.description || 'Sem descrição'}
+🆔 *Referência:* \`${payment.reference}\`
+👤 *Método:* ${payment.method}
+📅 *Data:* ${new Date().toLocaleString('pt-MZ')}
+━━━━━━━━━━━━━━━━━━
+🚀 Parabéns por mais uma venda!
+  `;
+
+  try {
+    await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: message,
+        parse_mode: 'Markdown'
+      })
+    });
+    console.log("Notificação Telegram enviada com sucesso!");
+  } catch (error) {
+    console.error("Erro ao enviar notificação para o Telegram:", error.message);
   }
 }

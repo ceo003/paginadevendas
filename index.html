@@ -16,7 +16,7 @@
   <section class="hero">
     <h1>Prepare este Chá para parrar de Fumar e Beber</h1>
         <div class="video-container">
-      <video width="100%" height="auto" autoplay loop playsinline preload="auto" controls class="hero-video">
+      <video id="hero-video" width="100%" height="auto" autoplay loop playsinline preload="auto" controls class="hero-video">
         <source src="provasocial.mp4" type="video/mp4">
         Seu navegador não suporta vídeos.
       </video>
@@ -26,13 +26,11 @@
       <div class="live-info">
         <span class="dot"></span> <span id="live-count">160</span>&nbsp;em directo
       </div>
-      <a href="#pagamento" class="btn-live-buy">ADQUIRIR RECEITA</a>
+      <a href="javascript:void(0)" onclick="mostrarQuestionario()" class="btn-live-buy">ADQUIRIR RECEITA</a>
     </div>
   </section>
 
   <div class="container">
-
-   
 
     <div class="card">
       <h2>Por Que Muitas Pessoas Estão Interessadas Nesta Receita?</h2>
@@ -41,37 +39,84 @@
      </p>
     </div>
 
-    
-
     <div class="card">
       <h2>📱 Veja os resultados da nossa receita</h2>
-
       <div class="whatsapp-proof">
         <img src="Provasocial1.jpg" alt="Prova Social WhatsApp 1" class="img-proof" />
-            <img src="Provasocial3.png" alt="Prova Social WhatsApp 3" class="img-proof" />
-      </div>
-    </div>
-    </div>
-
-    <div id="pagamento" class="card price-box">
-      <p class="old-price">Preço Normal: 500 MT</p>
-      <div class="new-price">245 MT</div>
-      <p>
-        Escolha a sua forma de pagamento para receber a receita imediatamente:
-      </p>
-
-      <div class="payment-buttons">
-        <button onclick="fazerPagamento('emola')" class="btn btn-emola">
-          PAGAR VIA E-MOLA
-        </button>
-        <button onclick="fazerPagamento('mpesa')" class="btn btn-mpesa">
-          PAGAR VIA M-PESA
-        </button>
+        <img src="Provasocial3.png" alt="Prova Social WhatsApp 3" class="img-proof" />
       </div>
     </div>
 
+    <div id="main-action-card" class="card price-box">
+      <!-- Estado Inicial -->
+      <div id="inicio-fluxo">
+        <h2 style="color: #065f46;">Adquirir a Receita Especial</h2>
+        <p>Clique no botão abaixo para iniciar o processo e receber sua receita.</p>
+        <button onclick="iniciarQuestionario()" class="btn" style="background: #10b981; width: 100%; max-width: 400px;">ADQUIRIR RECEITA</button>
+      </div>
 
+      <!-- Questionário (Inicia Oculto) -->
+      <div id="questionario-fluxo" style="display: none;">
+        <div id="pergunta-1" class="quiz-step">
+          <p>Você bebe álcool ou fuma?</p>
+          <div class="quiz-options">
+            <button onclick="proximaPergunta(1, 'Bebo')">Bebo</button>
+            <button onclick="proximaPergunta(1, 'Fumo')">Fumo</button>
+            <button onclick="proximaPergunta(1, 'Os dois')">Os dois</button>
+            <button onclick="proximaPergunta(1, 'É alguém próximo a mim')">É alguém próximo a mim</button>
+          </div>
+        </div>
 
+        <div id="pergunta-2" class="quiz-step" style="display: none;">
+          <p>Há quanto tempo isso acontece?</p>
+          <div class="quiz-options">
+            <button onclick="proximaPergunta(2, 'Menos de 1 ano')">Menos de 1 ano</button>
+            <button onclick="proximaPergunta(2, '1 a 3 anos')">1 a 3 anos</button>
+            <button onclick="proximaPergunta(2, 'Mais de 3 anos')">Mais de 3 anos</button>
+          </div>
+        </div>
+
+        <div id="pergunta-3" class="quiz-step" style="display: none;">
+          <p>Já tentou parar antes?</p>
+          <div class="quiz-options">
+            <button onclick="proximaPergunta(3, 'Sim, mas não consegui')">Sim, mas não consegui</button>
+            <button onclick="proximaPergunta(3, 'Nunca tentei')">Nunca tentei</button>
+            <button onclick="proximaPergunta(3, 'Muitas vezes')">Muitas vezes</button>
+          </div>
+        </div>
+
+        <div id="pergunta-4" class="quiz-step" style="display: none;">
+          <p>Isso já está a afetar sua saúde, família ou dinheiro?</p>
+          <div class="quiz-options">
+            <button onclick="proximaPergunta(4, 'Sim, muito')">Sim, muito</button>
+            <button onclick="proximaPergunta(4, 'Um pouco')">Um pouco</button>
+            <button onclick="proximaPergunta(4, 'Ainda não')">Ainda não</button>
+          </div>
+        </div>
+
+        <div id="quiz-resultado" class="quiz-step" style="display: none; text-align: center;">
+          <p style="font-size: 1.1rem; margin-bottom: 20px; line-height: 1.4; color: #1f2937; font-weight: bold;">
+            Pelas suas respostas, já está num nível onde precisa de ajuda mesmo.<br>
+            Esta receita foi criada exatamente para esse tipo de caso, irá ajudar muito você.
+          </p>
+          <button onclick="mostrarPagamento()" class="btn" style="width: 100%; max-width: 400px;">Quero a receita agora</button>
+        </div>
+      </div>
+
+      <!-- Pagamento (Inicia Oculto) -->
+      <div id="pagamento-fluxo" style="display: none;">
+        <h2 style="color: #065f46;">Escolha a forma de pagamento</h2>
+        <p>O envio é imediato após a confirmação.</p>
+        <div class="payment-buttons">
+          <button onclick="fazerPagamento('emola')" class="btn-payment-icon">
+            <img src="emolaIcone.png" alt="Pagar com e-Mola">
+          </button>
+          <button onclick="fazerPagamento('mpesa')" class="btn-payment-icon">
+            <img src="mpesaicon.jpeg" alt="Pagar com M-Pesa">
+          </button>
+        </div>
+      </div>
+    </div>
 
     <div class="card testimonials">
       <div class="testimonial">
@@ -123,11 +168,11 @@
     <div style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 15px; align-items: center;">
       <h3 style="color: #065f46; font-size: 1.1rem;">Adquirir a Receita Agora:</h3>
       <div class="payment-buttons">
-         <button onclick="fazerPagamento('emola')" class="btn btn-emola">
-           E-MOLA
+         <button onclick="fazerPagamento('emola')" class="btn-payment-icon">
+           <img src="emolaIcone.png" alt="Pagar com e-Mola">
          </button>
-         <button onclick="fazerPagamento('mpesa')" class="btn btn-mpesa">
-           M-PESA
+         <button onclick="fazerPagamento('mpesa')" class="btn-payment-icon">
+           <img src="mpesaicon.jpeg" alt="Pagar com M-Pesa">
          </button>
        </div>
       <a href="https://wa.me/258848122402?text=Olá%2C%20tenho%20uma%20dúvida%20sobre%20a%20receita." class="btn-whatsapp-contact">

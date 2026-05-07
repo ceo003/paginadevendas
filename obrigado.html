@@ -53,9 +53,20 @@
     <h1>Pagamento Confirmado!</h1>
     <p>Obrigado por adquirir a nossa receita. Clique no botão abaixo para acessar o PDF no Google Drive agora mesmo.</p>
     
-    <a href="https://drive.google.com/file/d/1miSkQ1liZy_Hi95cu-YDzJomWnKr5WL1/view?usp=sharing" class="btn-download" target="_blank">
+    <a id="download-link" href="https://drive.google.com/file/d/1miSkQ1liZy_Hi95cu-YDzJomWnKr5WL1/view?usp=sharing" class="btn-download" target="_blank">
       BAIXAR MINHA RECEITA
     </a>
   </div>
+
+  <script>
+    // Inicia o download automaticamente após 3 segundos
+    window.onload = function() {
+      setTimeout(function() {
+        const link = document.getElementById('download-link');
+        // Tenta abrir em uma nova aba
+        window.open(link.href, '_blank');
+      }, 3000);
+    };
+  </script>
 </body>
 </html>

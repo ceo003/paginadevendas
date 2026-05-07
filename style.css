@@ -42,6 +42,7 @@ body {
   margin-top: 25px;
   border-radius: 14px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  scroll-margin-top: 80px; /* Offset para não ficar debaixo da barra de promoção */
 }
 
 h2 {
@@ -62,6 +63,18 @@ li {
   text-align: center;
   background: #ecfdf5;
   border: 2px dashed #10b981;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease;
+}
+
+.quiz-step {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .old-price {
@@ -122,6 +135,70 @@ li {
 
 .btn-mpesa:hover {
   background: #b91c1c !important;
+}
+
+/* Estilos do Questionário */
+.quiz-step h3 {
+  color: #0f766e;
+  margin-bottom: 10px;
+}
+
+.quiz-step p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-options button {
+  padding: 15px;
+  border: 2px solid #0f766e;
+  background: white;
+  color: #0f766e;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: left;
+}
+
+.quiz-options button:hover {
+  background: #0f766e;
+  color: white;
+}
+
+/* Botões de Pagamento com Ícones */
+.btn-payment-icon {
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 80px;
+  overflow: hidden;
+}
+
+.btn-payment-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.btn-payment-icon:hover {
+  border-color: #10b981;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .video-container {
