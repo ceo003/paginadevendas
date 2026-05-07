@@ -59,3 +59,34 @@ window.onload = function () {
     });
   }
 };
+
+// Lógica de Pagamento Dinâmico
+async function fazerPagamento(metodo) {
+  const originalText = event.target.textContent;
+  const btn = event.target;
+  
+  try {
+    btn.disabled = true;
+    btn.textContent = "PROCESSANDO...";
+
+    const response = await fetch('/api/pagar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ method: metodo })
+    });
+
+    const data = await response.json();
+
+    if (data.checkout_url) {
+      window.location.href = data.checkout_url;
+    } else {
+      alert("Erro ao gerar pagamento: " + (data.error || "Tente novamente."));
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  } catch (error) {
+    alert("Erro de conexão. Verifique sua internet.");
+    btn.disabled = false;
+    btn.textContent = originalText;
+  }
+}
