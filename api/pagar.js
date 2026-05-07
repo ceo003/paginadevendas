@@ -20,10 +20,10 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         amount: "245.00",
-        reference: `REC-${Date.now()}`, // Referência única baseada no tempo
-        description: "Receita do Chá Natural",
+        reference: `REC${Date.now()}`, // Removi o hífen para conter apenas letras e números
+        description: "Receita do Cha Natural",
         method: method,
-        return_url: "https://lojasolucion.online/api/download" // O REDIRECIONAMENTO AUTOMÁTICO
+        return_url: "https://lojasolucion.online/api/download"
       })
     });
 
