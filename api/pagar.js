@@ -1,60 +1,59 @@
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Método não permitido' });
+  if (req.method !== "POST") {
+    return res.status(405).json({
+      error: "Método não permitido"
+    });
   }
 
   try {
-    // 1. Garantir que o corpo da requisição existe
-    const body = req.body || {};
-    const selectedMethod = body.method || 'mpesa';
-
-    // 2. Ler o Token com segurança
-    const rawToken = process.env.PAYSUITE_TOKEN || "";
-    const token = String(rawToken).trim();
+    const token = process.env.PAYSUITE_TOKEN?.trim();
 
     if (!token) {
-      return res.status(500).json({ error: 'Erro: Variável PAYSUITE_TOKEN não encontrada no Vercel.' });
+      return res.status(500).json({
+        error: "Token não configurado"
+      });
     }
 
-    // 3. Montar o payload (Dados da venda)
-    const payload = {
-      amount: "245.00",
-      reference: "REC" + Date.now(),
-      description: "Receita de Cha Natural",
-      method: selectedMethod,
+    const { method } = req.body;
+    // Referência SEM hífen
+    const reference = `REC${Date.now()}`;
+
+    const body = {
+      amount: 245,
+      reference,
+      description: "Compra da Receita do Cha Natural",
+      method: method === 'emola' ? 'emola' : 'mpesa',
+      // IMPORTANTE: URLs limpas sem caracteres de escape
       return_url: "https://lojasolucion.online/obrigado.html",
       callback_url: "https://lojasolucion.online/api/webhook"
     };
 
-    // 4. Chamada para o PaySuite
-    const response = await fetch('https://paysuite.tech/api/v1/payments', {
-      method: 'POST',
+    const response = await fetch("https://paysuite.tech/api/v1/payments", {
+      method: "POST",
       headers: {
-        'Authorization': 'Bearer ' + token,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        Accept: "application/json"
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(body)
     });
 
-    const responseText = await response.text();
-    let data;
+    const data = await response.json();
 
-    try {
-      data = JSON.parse(responseText);
-    } catch (e) {
-      return res.status(500).json({ error: 'O PaySuite retornou uma resposta não-JSON: ' + responseText });
+    console.log("PAYSUITE RESPONSE:", data);
+
+    if (!response.ok) {
+      return res.status(response.status).json(data);
     }
 
-    if (data.status === 'success' && data.data && data.data.checkout_url) {
-      return res.status(200).json({ checkout_url: data.data.checkout_url });
-    } else {
-      return res.status(400).json({ 
-        error: 'Erro no PaySuite: ' + (data.message || JSON.stringify(data)) 
-      });
-    }
+    return res.status(200).json({
+      checkout_url: data.data.checkout_url
+    });
 
   } catch (error) {
-    return res.status(500).json({ error: 'Falha crítica: ' + error.message });
+    console.error(error);
+    return res.status(500).json({
+      error: error.message
+    });
   }
 }

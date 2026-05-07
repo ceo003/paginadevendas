@@ -1,42 +1,60 @@
-import crypto from 'crypto';
+import crypto from "crypto";
+
+export const config = {
+  api: {
+    bodyParser: false
+  }
+};
+
+async function getRawBody(readable) {
+  const chunks = [];
+  for await (const chunk of readable) {
+    chunks.push(chunk);
+  }
+  return Buffer.concat(chunks).toString("utf8");
+}
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method Not Allowed' });
+  if (req.method !== "POST") {
+    return res.status(405).send("Method Not Allowed");
   }
 
-  const payload = JSON.stringify(req.body);
-  const signature = req.headers['x-webhook-signature'];
-  const secret = process.env.PAYSUITE_WEBHOOK_SECRET || 'whsec_c1ab13667f73cc4067608c59ad1728cf4df2039632ad2ab2';
+  try {
+    const rawBody = await getRawBody(req);
+    const signature = req.headers["x-webhook-signature"];
+    const secret = process.env.PAYSUITE_WEBHOOK_SECRET?.trim();
 
-  if (!signature) {
-    return res.status(401).json({ message: 'Assinatura ausente' });
+    if (!secret) {
+      console.error("Webhook Secret não configurado!");
+      return res.status(500).send("Secret missing");
+    }
+
+    const calculatedSignature = crypto
+      .createHmac("sha256", secret)
+      .update(rawBody)
+      .digest("hex");
+
+    // Validar assinatura para segurança profissional
+    if (signature !== calculatedSignature) {
+      console.log("Assinatura inválida detectada");
+      return res.status(401).send("Invalid signature");
+    }
+
+    const data = JSON.parse(rawBody);
+    console.log("WEBHOOK DATA:", data);
+
+    // Evento de sucesso
+    if (data.event === "payment.success") {
+      const payment = data.data;
+      console.log(`PAGAMENTO APROVADO: Referência ${payment.reference}`);
+      
+      // Aqui você pode adicionar lógica para disparar e-mails, etc.
+    }
+
+    return res.status(200).send("OK");
+
+  } catch (error) {
+    console.error("Erro no Webhook:", error.message);
+    return res.status(500).send(error.message);
   }
-
-  // Verificar assinatura (Segurança Profissional)
-  const calculatedSignature = crypto
-    .createHmac('sha256', secret)
-    .update(payload)
-    .digest('hex');
-
-  // Nota: O PaySuite pode enviar a assinatura em formatos diferentes, 
-  // aqui comparamos a calculada com a recebida.
-  if (signature !== calculatedSignature) {
-    console.error('Assinatura inválida detectada!');
-    // return res.status(401).json({ message: 'Assinatura inválida' });
-  }
-
-  const { event, data } = req.body;
-
-  if (event === 'payment.success') {
-    const reference = data.reference;
-    const amount = data.amount;
-    
-    console.log(`PAGAMENTO CONFIRMADO: Ref ${reference}, Valor ${amount}`);
-    
-    // Aqui você integraria com banco de dados ou enviaria email/whatsapp
-    // Por ser uma Vercel Function, os logs ficam salvos no painel da Vercel.
-  }
-
-  return res.status(200).send('OK');
 }
