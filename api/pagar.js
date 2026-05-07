@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     const body = {
       amount: 245,
       reference,
-      description: "Compra da Receita do Cha Natural",
+      description: "Compra da receita para parrar de Beber e Fumar",
       method: method === 'emola' ? 'emola' : 'mpesa',
       return_url: `${baseUrl}/obrigado.html`
       // Removido callback_url daqui para evitar conflito com a configuração manual do painel
