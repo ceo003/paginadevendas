@@ -28,7 +28,8 @@ export default async function handler(req, res) {
         reference: `REC${Date.now()}`,
         description: "Receita do Cha Natural",
         method: metodoMap[method] || method,
-        return_url: "https://lojasolucion.online/obrigado.html"
+        callback_url: "https://lojasolucion.online/api/webhook"
+        // O PaySuite pode estar exigindo que a URL de retorno seja configurada via callback ou em um campo específico
       })
     });
 
