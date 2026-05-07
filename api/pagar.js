@@ -29,8 +29,8 @@ export default async function handler(req, res) {
       reference,
       description: "Compra da Receita do Cha Natural",
       method: method === 'emola' ? 'emola' : 'mpesa',
-      return_url: `${baseUrl}/obrigado.html`,
-      callback_url: `${baseUrl}/api/webhook`
+      return_url: `${baseUrl}/obrigado.html`
+      // Removido callback_url daqui para evitar conflito com a configuração manual do painel
     };
 
     console.log("Chamando PaySuite com baseUrl:", baseUrl);
