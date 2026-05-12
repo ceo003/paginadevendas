@@ -101,7 +101,26 @@
               Esta receita foi criada exatamente para esse tipo de situação, Clique no butão abaixo.
             </p>
           </div>
-          <button onclick="mostrarPagamento()" class="btn" style="width: 100%; max-width: 400px;">Quero a receita agora</button>
+          <button onclick="mostrarWhatsApp()" class="btn" style="width: 100%; max-width: 400px;">Quero a receita agora</button>
+        </div>
+
+        <!-- Seção de WhatsApp (Inicia Oculto) -->
+        <div id="whatsapp-step" class="quiz-step" style="display: none;">
+          <div class="security-header">
+            <h3 style="color: #065f46; margin-bottom: 10px;">Compra Segura</h3>
+            <p style="color: #555; font-size: 0.9rem; margin-bottom: 15px;">Este sistema foi aprovado pelo INSS</p>
+            
+            <div class="operators" style="display: flex; gap: 15px; justify-content: center; margin-bottom: 20px;">
+              <span style="font-weight: bold; color: #222; background: #f0fdf4; padding: 5px 12px; border-radius: 5px;">Movitel</span>
+              <span style="font-weight: bold; color: #222; background: #fef3c7; padding: 5px 12px; border-radius: 5px;">Vodacom</span>
+            </div>
+          </div>
+
+          <div class="whatsapp-form">
+            <label for="whatsapp-number" style="display: block; text-align: left; font-weight: bold; margin-bottom: 8px; color: #333;">Número de WhatsApp para receber a receita:</label>
+            <input type="tel" id="whatsapp-number" placeholder="Ex: 84 1234567" style="width: 100%; padding: 12px 15px; border: 2px solid #d1d5db; border-radius: 8px; font-size: 1rem; margin-bottom: 20px; outline: none;">
+            <button onclick="validarWhatsApp()" class="btn" style="width: 100%; max-width: 400px;">Continuar para Pagamento</button>
+          </div>
         </div>
       </div>
 
@@ -189,6 +208,9 @@
     </div>
     © 2026 - Todos os direitos reservados.
   </footer>
+
+  <!-- Notificações de Prova Social -->
+  <div id="social-notifications" class="social-notifications"></div>
 
   <script src="script.js"></script>
 </body>

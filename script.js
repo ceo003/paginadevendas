@@ -45,11 +45,78 @@ function startLiveCounter() {
   }, 3000); // Update every 3 seconds
 }
 
+// Notificações de Prova Social
+const nomes = [
+  "Alberto Mucove",
+  "Maria da Graça",
+  "João Muchanga",
+  "Ana Sousa",
+  "Carlos Zefanias",
+  "Teresa Mazive",
+  "David Simões",
+  "Luísa Nhantumbo",
+  "Fernando Chissano",
+  "Isabel Mavunha",
+  "Paulo Manjate",
+  "Célia Matavele",
+  "Ricardo Ngule",
+  "Sofia Uamusse",
+  "Eduardo Júnior",
+  "Marta Dinis",
+  "António Macaringue",
+  "Clara Chauque",
+  "Miguel Cuambe",
+  "Helena Sitoe",
+  "Luís Malate",
+  "Rosa Tembe",
+  "Jorge Nhabinde",
+  "Fátima Mondlane",
+  "André Mazive"
+];
+
+const metodos = ["M-Pesa", "e-Mola"];
+
+function criarNotificacao() {
+  const nomeAleatorio = nomes[Math.floor(Math.random() * nomes.length)];
+  const metodoAleatorio = metodos[Math.floor(Math.random() * metodos.length)];
+  const minutosAtras = Math.floor(Math.random() * 15) + 1; // 1 a 15 minutos atrás
+
+  const notification = document.createElement('div');
+  notification.className = 'social-notification';
+  notification.innerHTML = `
+    <div class="icon">✓</div>
+    <div class="text">
+      <strong>${nomeAleatorio}</strong> acabou de comprar via <strong>${metodoAleatorio}</strong><br>
+      <small>há ${minutosAtras} minuto${minutosAtras > 1 ? 's' : ''}</small>
+    </div>
+  `;
+
+  const container = document.getElementById('social-notifications');
+  container.appendChild(notification);
+
+  // Remover a notificação após a animação
+  setTimeout(() => {
+    notification.remove();
+  }, 5000);
+}
+
+function iniciarNotificacoes() {
+  // Primeira notificação após 5 segundos
+  setTimeout(criarNotificacao, 5000);
+
+  // Notificações subsequentes a cada 8-15 segundos
+  setInterval(() => {
+    const intervalo = Math.floor(Math.random() * (15000 - 8000 + 1)) + 8000;
+    setTimeout(criarNotificacao, intervalo);
+  }, 10000);
+}
+
 window.onload = function () {
   const twoHours = 60 * 60 * 2;
   const display = document.querySelector('#timer');
   startTimer(twoHours, display);
   startLiveCounter();
+  iniciarNotificacoes();
 
   // Tentar forçar o autoplay com som
   const video = document.getElementById('hero-video');
@@ -93,6 +160,28 @@ function proximaPergunta(atual, resposta) {
     // Se não houver próxima pergunta, mostra o resultado
     document.getElementById('quiz-resultado').style.display = 'block';
   }
+}
+
+function mostrarWhatsApp() {
+  document.getElementById('quiz-resultado').style.display = 'none';
+  document.getElementById('whatsapp-step').style.display = 'block';
+  document.getElementById('main-action-card').scrollIntoView({ behavior: 'smooth' });
+}
+
+function validarWhatsApp() {
+  const input = document.getElementById('whatsapp-number');
+  const numero = input.value.trim();
+  
+  // Verifica se o número tem pelo menos 9 dígitos (formato moçambicano)
+  if (numero.length < 9 || !/^\d+$/.test(numero.replace(/\s/g, ''))) {
+    alert('Por favor, insira um número de WhatsApp válido!');
+    return;
+  }
+
+  // Se o número for válido, continua para o pagamento
+  document.getElementById('whatsapp-step').style.display = 'none';
+  document.getElementById('pagamento-fluxo').style.display = 'block';
+  document.getElementById('main-action-card').scrollIntoView({ behavior: 'smooth' });
 }
 
 function mostrarPagamento() {
