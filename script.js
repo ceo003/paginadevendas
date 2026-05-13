@@ -112,9 +112,9 @@ function iniciarNotificacoes() {
 }
 
 window.onload = function () {
-  const twoHours = 60 * 60 * 2;
+  const fifteenMinutes = 60 * 15;
   const display = document.querySelector('#timer');
-  startTimer(twoHours, display);
+  startTimer(fifteenMinutes, display);
   startLiveCounter();
   iniciarNotificacoes();
 
@@ -142,7 +142,31 @@ function mostrarQuestionario() {
 function iniciarQuestionario() {
   document.getElementById('inicio-fluxo').style.display = 'none';
   document.getElementById('questionario-fluxo').style.display = 'block';
+  document.getElementById('quiz-footer').style.display = 'block';
+  atualizarProgresso(1);
   document.getElementById('main-action-card').scrollIntoView({ behavior: 'smooth' });
+}
+
+function atualizarProgresso(atual) {
+  const totalPassos = 6; // 4 perguntas + resultado + whatsapp
+  const passoAtual = atual;
+  const percentual = Math.round((passoAtual / totalPassos) * 100);
+  
+  const progressHeader = document.querySelector('.progress-header');
+  
+  if (atual > 4) {
+    // Esconde a barra de progresso após o resultado
+    if (progressHeader) {
+      progressHeader.style.display = 'none';
+    }
+  } else {
+    if (progressHeader) {
+      progressHeader.style.display = 'block';
+    }
+    document.getElementById('step-text').textContent = `Passo ${passoAtual} de ${totalPassos}`;
+    document.getElementById('progress-percent').textContent = `${percentual}% concluído`;
+    document.getElementById('progress-fill').style.width = `${percentual}%`;
+  }
 }
 
 function proximaPergunta(atual, resposta) {
@@ -156,32 +180,56 @@ function proximaPergunta(atual, resposta) {
 
   if (proximoStep) {
     proximoStep.style.display = 'block';
+    atualizarProgresso(atual + 1);
   } else {
     // Se não houver próxima pergunta, mostra o resultado
+    document.getElementById('quiz-footer').style.display = 'none';
     document.getElementById('quiz-resultado').style.display = 'block';
+    atualizarProgresso(5); // Passo 5 de 6 é o resultado
   }
 }
 
-function mostrarWhatsApp() {
+function mostrarPagamento() {
   document.getElementById('quiz-resultado').style.display = 'none';
-  document.getElementById('whatsapp-step').style.display = 'block';
+  document.getElementById('quiz-footer').style.display = 'none';
+  document.getElementById('questionario-fluxo').style.display = 'none';
+  document.getElementById('pagamento-fluxo').style.display = 'block';
   document.getElementById('main-action-card').scrollIntoView({ behavior: 'smooth' });
 }
 
-function validarWhatsApp() {
-  const input = document.getElementById('whatsapp-number');
-  const numero = input.value.trim();
+function fazerPagamentoDireto(metodo) {
+  // Verifica o número de WhatsApp primeiro
+  const inputFinal = document.getElementById('whatsapp-number-final');
+  const numero = inputFinal.value.trim();
   
-  // Verifica se o número tem pelo menos 9 dígitos (formato moçambicano)
   if (numero.length < 9 || !/^\d+$/.test(numero.replace(/\s/g, ''))) {
     alert('Por favor, insira um número de WhatsApp válido!');
     return;
   }
 
-  // Se o número for válido, continua para o pagamento
-  document.getElementById('whatsapp-step').style.display = 'none';
-  document.getElementById('pagamento-fluxo').style.display = 'block';
-  document.getElementById('main-action-card').scrollIntoView({ behavior: 'smooth' });
+  // Se o WhatsApp for válido, chama a função de pagamento diretamente
+  fazerPagamento(metodo);
+}
+
+function finalizarPagamento() {
+  // Pega o método de pagamento selecionado
+  const metodoSelecionado = document.querySelector('input[name="payment-method"]:checked');
+  if (!metodoSelecionado) {
+    alert('Por favor, escolha um método de pagamento!');
+    return;
+  }
+
+  // Verifica o número de WhatsApp final
+  const inputFinal = document.getElementById('whatsapp-number-final');
+  const numero = inputFinal.value.trim();
+  
+  if (numero.length < 9 || !/^\d+$/.test(numero.replace(/\s/g, ''))) {
+    alert('Por favor, insira um número de WhatsApp válido!');
+    return;
+  }
+
+  // Chama a função de pagamento com o método selecionado
+  fazerPagamento(metodoSelecionado.value);
 }
 
 function mostrarPagamento() {
@@ -192,13 +240,19 @@ function mostrarPagamento() {
 
 // Lógica de Pagamento Dinâmico
 async function fazerPagamento(metodo) {
-  // Captura o botão que foi clicado
-  const btn = event.currentTarget;
-  const originalContent = btn.innerHTML;
+  // Pega todos os botões de pagamento
+  const botoes = document.querySelectorAll('.payment-btn-final');
   
   try {
-    btn.disabled = true;
-    btn.innerHTML = "<span style='font-size: 0.8rem;'>AGUARDE...</span>";
+    // Desabilita todos os botões e altera o texto do que foi clicado
+    botoes.forEach(botao => {
+      botao.disabled = true;
+    });
+    
+    // Salva o conteúdo original do botão clicado
+    const btnClicado = event.currentTarget;
+    const originalContent = btnClicado.innerHTML;
+    btnClicado.innerHTML = "<span style='font-size: 0.8rem;'>AGUARDE...</span>";
 
     const response = await fetch('/api/pagar', {
       method: 'POST',
@@ -218,13 +272,23 @@ async function fazerPagamento(metodo) {
       window.location.href = data.checkout_url;
     } else {
       alert("Erro ao gerar pagamento: " + (data.error || "Tente novamente."));
-      btn.disabled = false;
-      btn.innerHTML = originalContent;
+      // Restaura os botões
+      botoes.forEach(botao => {
+        botao.disabled = false;
+      });
+      btnClicado.innerHTML = originalContent;
     }
   } catch (error) {
     console.error("Erro no pagamento:", error);
     alert("Erro: " + error.message);
-    btn.disabled = false;
-    btn.innerHTML = originalContent;
+    // Restaura os botões
+    const btnClicado = event.currentTarget;
+    const originalContent = btnClicado ? btnClicado.innerHTML : '';
+    botoes.forEach(botao => {
+      botao.disabled = false;
+    });
+    if (btnClicado) {
+      btnClicado.innerHTML = originalContent;
+    }
   }
 }

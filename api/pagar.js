@@ -25,7 +25,7 @@ export default async function handler(req, res) {
     const baseUrl = `${protocol}://${host}`;
 
     const body = {
-      amount: 245,
+      amount: 147,
       reference,
       description: "Compra da receita para parrar de Beber e Fumar",
       method: method === 'emola' ? 'emola' : 'mpesa',
