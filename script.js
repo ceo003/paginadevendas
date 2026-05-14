@@ -117,84 +117,17 @@ window.onload = function () {
   startTimer(fifteenMinutes, display);
   startLiveCounter();
   iniciarNotificacoes();
-
-  // Tentar forçar o autoplay com som
-  const video = document.getElementById('hero-video');
-  if (video) {
-    video.play().catch(error => {
-      console.log("Autoplay com som bloqueado pelo navegador. O usuário precisa interagir primeiro.");
-    });
-  }
 };
 
-// Lógica do Questionário e Fluxo de Venda
-function mostrarQuestionario() {
-  // Chamado pelo botão do Hero
-  const card = document.getElementById('main-action-card');
-  card.scrollIntoView({ behavior: 'smooth' });
-  
-  // Se ainda não iniciou, inicia automaticamente
-  if (document.getElementById('inicio-fluxo').style.display !== 'none') {
-    iniciarQuestionario();
+function darLike(btn, likesIniciais) {
+  if (btn.classList.contains('liked')) {
+    return;
   }
-}
-
-function iniciarQuestionario() {
-  document.getElementById('inicio-fluxo').style.display = 'none';
-  document.getElementById('questionario-fluxo').style.display = 'block';
-  document.getElementById('quiz-footer').style.display = 'block';
-  atualizarProgresso(1);
-  document.getElementById('main-action-card').scrollIntoView({ behavior: 'smooth' });
-}
-
-function atualizarProgresso(atual) {
-  const totalPassos = 6; // 4 perguntas + resultado + whatsapp
-  const passoAtual = atual;
-  const percentual = Math.round((passoAtual / totalPassos) * 100);
   
-  const progressHeader = document.querySelector('.progress-header');
-  
-  if (atual > 4) {
-    // Esconde a barra de progresso após o resultado
-    if (progressHeader) {
-      progressHeader.style.display = 'none';
-    }
-  } else {
-    if (progressHeader) {
-      progressHeader.style.display = 'block';
-    }
-    document.getElementById('step-text').textContent = `Passo ${passoAtual} de ${totalPassos}`;
-    document.getElementById('progress-percent').textContent = `${percentual}% concluído`;
-    document.getElementById('progress-fill').style.width = `${percentual}%`;
-  }
-}
-
-function proximaPergunta(atual, resposta) {
-  console.log(`Pergunta ${atual} respondida: ${resposta}`);
-  
-  const stepAtual = document.getElementById(`pergunta-${atual}`);
-  stepAtual.style.display = 'none';
-
-  const proximo = atual + 1;
-  const proximoStep = document.getElementById(`pergunta-${proximo}`);
-
-  if (proximoStep) {
-    proximoStep.style.display = 'block';
-    atualizarProgresso(atual + 1);
-  } else {
-    // Se não houver próxima pergunta, mostra o resultado
-    document.getElementById('quiz-footer').style.display = 'none';
-    document.getElementById('quiz-resultado').style.display = 'block';
-    atualizarProgresso(5); // Passo 5 de 6 é o resultado
-  }
-}
-
-function mostrarPagamento() {
-  document.getElementById('quiz-resultado').style.display = 'none';
-  document.getElementById('quiz-footer').style.display = 'none';
-  document.getElementById('questionario-fluxo').style.display = 'none';
-  document.getElementById('pagamento-fluxo').style.display = 'block';
-  document.getElementById('main-action-card').scrollIntoView({ behavior: 'smooth' });
+  btn.classList.add('liked');
+  const countElement = btn.querySelector('.like-count');
+  const novoTotal = likesIniciais + 1;
+  countElement.textContent = novoTotal;
 }
 
 function fazerPagamentoDireto(metodo) {
@@ -209,33 +142,6 @@ function fazerPagamentoDireto(metodo) {
 
   // Se o WhatsApp for válido, chama a função de pagamento diretamente
   fazerPagamento(metodo);
-}
-
-function finalizarPagamento() {
-  // Pega o método de pagamento selecionado
-  const metodoSelecionado = document.querySelector('input[name="payment-method"]:checked');
-  if (!metodoSelecionado) {
-    alert('Por favor, escolha um método de pagamento!');
-    return;
-  }
-
-  // Verifica o número de WhatsApp final
-  const inputFinal = document.getElementById('whatsapp-number-final');
-  const numero = inputFinal.value.trim();
-  
-  if (numero.length < 9 || !/^\d+$/.test(numero.replace(/\s/g, ''))) {
-    alert('Por favor, insira um número de WhatsApp válido!');
-    return;
-  }
-
-  // Chama a função de pagamento com o método selecionado
-  fazerPagamento(metodoSelecionado.value);
-}
-
-function mostrarPagamento() {
-  document.getElementById('questionario-fluxo').style.display = 'none';
-  document.getElementById('pagamento-fluxo').style.display = 'block';
-  document.getElementById('main-action-card').scrollIntoView({ behavior: 'smooth' });
 }
 
 // Lógica de Pagamento Dinâmico

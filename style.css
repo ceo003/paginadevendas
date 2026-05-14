@@ -1257,6 +1257,79 @@ footer {
   color: #065f46;
 }
 
+.facebook-style .review-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.facebook-style .review-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #065f46, #10b981);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.facebook-style .review-user-info strong {
+  display: block;
+  color: #1f2937;
+  font-size: 0.95rem;
+}
+
+.facebook-style .review-location {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.facebook-style .review-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.facebook-style .like-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 8px;
+  transition: background 0.2s;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.facebook-style .like-btn:hover {
+  background: #f3f4f6;
+}
+
+.facebook-style .like-btn.liked {
+  color: #10b981;
+}
+
+.facebook-style .like-icon {
+  font-size: 1.1rem;
+}
+
+.facebook-style .like-count {
+  font-weight: 500;
+}
+
+.facebook-style .review-time {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
 @keyframes slideIn {
   from {
     transform: translateX(100%);

@@ -3,108 +3,140 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Receita Natural - Chá Especial</title>
+  <title>10 Negócios para Fazer com 2 Mil Meticais</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <div class="promo-bar">
-    PROMOÇÃO LIMITADA — Termina em: <span id="timer">15:00</span> 
-
+    🔥 ÚLTIMAS VAGAS PROMOCIONAIS — Termina em: <span id="timer">15:00</span> 
   </div>
 
   <section class="hero">
     <div class="hero-content">
       <div class="hero-badge hero-badge-white">
-        ⭐ Método Natural e 100% Eficaz
+        ⭐ Guia Exclusivo para Moçambique
       </div>
-      <h1>Parar de Beber e Fumar sem Sofrimento</h1>
-      <p class="hero-subtitle">Receita tradicional que já ajudou mais de 3.800 pessoas a recuperar o controle da sua vida</p>
       
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-value">100%</span>
-          <span class="stat-label">Natural</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-value">3.8K+</span>
-          <span class="stat-label">Clientes</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-value">4.9⭐</span>
-          <span class="stat-label">Avaliação</span>
-        </div>
-      </div>
-
+      <h1>Deixe de Depender de Um Salário e Comece a Lucrar com Apenas 2 Mil Meticais</h1>
+      <p class="hero-subtitle">Descubra 10 negócios que você pode iniciar HOJE, sem experiência, e transformar a sua vida financeira!</p>
+      
       <div class="video-container">
-        <video id="hero-video" width="100%" height="auto" autoplay loop playsinline preload="auto" controls class="hero-video">
-          <source src="provasocial.mp4" type="video/mp4">
-          Seu navegador não suporta vídeos.
-        </video>
+        <img src="CapaNegocios.jpg" alt="Capa do Ebook - 10 Negócios para Fazer com 2 Mil Meticais" class="hero-cover" style="width: 100%; height: auto; border-radius: 12px;">
       </div>
 
       <div class="live-viewers">
         <div class="live-info">
-          <span class="dot"></span> <span id="live-count">160</span>&nbsp;em directo
+          <span class="dot"></span> <span id="live-count">160</span>&nbsp;vendo agora
         </div>
-        <a href="javascript:void(0)" onclick="mostrarQuestionario()" class="btn-live-buy">QUERO A RECEITA AGORA</a>
+        <a href="#preco" class="btn-live-buy">🔥 QUERO TRANSFORMAR MINHA VIDA</a>
       </div>
     </div>
   </section>
 
   <div class="container">
 
+    <div class="card">
+      <h2>O Que Vai Alcançar?</h2>
+      <ul style="list-style: none; padding: 0;">
+        <li style="padding: 10px 0; display: flex; align-items: start; gap: 10px;">
+          <span style="color: #10b981; font-size: 1.5rem;">✅</span>
+          <span><strong>Ganhar dinheiro extra</strong> sem deixar o seu trabalho actual</span>
+        </li>
+        <li style="padding: 10px 0; display: flex; align-items: start; gap: 10px;">
+          <span style="color: #10b981; font-size: 1.5rem;">✅</span>
+          <span><strong>Ter independência financeira</strong> com negócios simples e lucrativos</span>
+        </li>
+        <li style="padding: 10px 0; display: flex; align-items: start; gap: 10px;">
+          <span style="color: #10b981; font-size: 1.5rem;">✅</span>
+          <span><strong>Criar uma fonte de renda</strong> que cresce com o tempo</span>
+        </li>
+        <li style="padding: 10px 0; display: flex; align-items: start; gap: 10px;">
+          <span style="color: #10b981; font-size: 1.5rem;">✅</span>
+          <span><strong>Começar hoje mesmo</strong> sem esperar por "o momento certo"</span>
+        </li>
+      </ul>
+    </div>
+
     <div class="card reviews-card">
       <div class="reviews-header">
-                <h3>Avaliações dos Clientes</h3>
+                <h3>O Que As Pessoas Estão Dizendo</h3>
       </div>
       <div class="reviews-grid">
-        <div class="review-item">
-          <div class="review-stars">⭐⭐⭐⭐⭐</div>
-          <p class="review-text">"Parar de fumar depois de 10 anos! Incrível como funciona."</p>
-          <p class="review-author">- João M., Maputo</p>
+        <div class="review-item facebook-style">
+          <div class="review-header">
+            <div class="review-avatar">JM</div>
+            <div class="review-user-info">
+              <strong>João M.</strong>
+              <div class="review-location">Maputo</div>
+            </div>
+          </div>
+          <p class="review-text">"No início achei que era só mais um guia, mas depois de começar o negócio de snacks já estou a lucrar 3x o meu investimento! Muito prático."</p>
+          <div class="review-actions">
+            <button class="like-btn" onclick="darLike(this, 176)">
+              <span class="like-icon">👍</span>
+              <span class="like-count">176</span>
+            </button>
+            <span class="review-time">2 horas atrás</span>
+          </div>
         </div>
-        <div class="review-item">
-          <div class="review-stars">⭐⭐⭐⭐⭐</div>
-          <p class="review-text">"Minha família já agradece. Muito obrigado!"</p>
-          <p class="review-author">- Maria C., Matola</p>
+
+        <div class="review-item facebook-style">
+          <div class="review-header">
+            <div class="review-avatar">MC</div>
+            <div class="review-user-info">
+              <strong>Maria C.</strong>
+              <div class="review-location">Matola</div>
+            </div>
+          </div>
+          <p class="review-text">"Investi 2 mil e já recuperei tudo em 15 dias! O passo a passo é tão fácil que até eu consegui."</p>
+          <div class="review-actions">
+            <button class="like-btn" onclick="darLike(this, 234)">
+              <span class="like-icon">👍</span>
+              <span class="like-count">234</span>
+            </button>
+            <span class="review-time">5 horas atrás</span>
+          </div>
         </div>
-        <div class="review-item">
-          <div class="review-stars">⭐⭐⭐⭐⭐</div>
-          <p class="review-text">"Resultados em 2 semanas. Simples e eficaz."</p>
-          <p class="review-author">- Carlos D., Xai-Xai</p>
+
+        <div class="review-item facebook-style">
+          <div class="review-header">
+            <div class="review-avatar">CD</div>
+            <div class="review-user-info">
+              <strong>Carlos D.</strong>
+              <div class="review-location">Xai-Xai</div>
+            </div>
+          </div>
+          <p class="review-text">"Ideias geniais adaptadas à realidade de Moçambique. Melhor investimento que fiz este ano!"</p>
+          <div class="review-actions">
+            <button class="like-btn" onclick="darLike(this, 189)">
+              <span class="like-icon">👍</span>
+              <span class="like-count">189</span>
+            </button>
+            <span class="review-time">1 dia atrás</span>
+          </div>
         </div>
-      </div>
-      <div class="reviews-footer">
-        <p class="total-reviews">+3.842 avaliações verificadas</p>
       </div>
     </div>
 
     <div class="card">
-      <h2>Por Que Muitas Pessoas Estão Interessadas Nesta Receita?</h2>
-      <p>
-       Receita simples, ingredientes baratos e modo de preparação explicado passo a passo.
-     </p>
+      <h2>O Que Vai Aprender?</h2>
+      <ul>
+        <li>10 negócios lucrativos que pode iniciar com apenas 2.000 MT</li>
+        <li>Passo a passo detalhado para cada negócio</li>
+        <li>Dicas de marketing para atrair clientes rapidamente</li>
+        <li>Estratégias para maximizar os seus lucros</li>
+      </ul>
     </div>
 
-    <div class="card">
-      <h2>📱 Veja os resultados da nossa receita</h2>
-      <div class="whatsapp-proof">
-        <img src="Provasocial1.jpg" alt="Prova Social WhatsApp 1" class="img-proof" />
-        <img src="Provasocial3.png" alt="Prova Social WhatsApp 3" class="img-proof" />
-      </div>
-    </div>
-
-    <div class="card price-box">
-      <div class="security-badge" style="margin-bottom: 15px;">
-        <span class="lock-icon">🔒</span> COMPRA 100% SEGURA
+    <div class="card price-box" id="preco">
+      <div class="urgency-badge" style="background: #fef3c7; padding: 10px 20px; border-radius: 10px; margin-bottom: 15px; display: inline-block;">
+        ⚠️ <strong>Preço sobe em breve!</strong> Aproveite a promoção de lançamento.
       </div>
       
-      <h2 style="color: #1f2937; margin: 10px 0; font-size: 1.6rem;">Receba a Receita Completa<br><span style="color: #10b981;">Hoje Mesmo!</span></h2>
+      <h2 style="color: #1f2937; margin: 10px 0; font-size: 1.6rem;">Receba o Ebook Completo<br><span style="color: #10b981;">Hoje Mesmo!</span></h2>
       
-      <p style="color: #4b5563; margin-bottom: 15px; font-size: 0.95rem;">Método natural que já ajudou milhares de pessoas.</p>
+      <p style="color: #4b5563; margin-bottom: 15px; font-size: 0.95rem;">Não perca esta oportunidade de transformar a sua vida financeira!</p>
       
       <div class="trust-icons">
         <div class="trust-item">
@@ -118,8 +150,9 @@
       </div>
       
       <div class="price-display" style="margin: 20px 0;">
-        <span class="old-price" style="font-size: 1.1rem; text-decoration: line-through; color: #9ca3af;">500 MT</span>
-        <div class="new-price" style="font-size: 2.8rem; color: #059669; font-weight: 900; margin: 5px 0;">147 MT</div>
+        <span class="old-price" style="font-size: 1.5rem; text-decoration: line-through; color: #9ca3af;">600 MT</span>
+        <div style="font-size: 1.2rem; color: #374151; margin: 5px 0;">👇</div>
+        <div class="new-price" style="font-size: 3rem; color: #059669; font-weight: 900; margin: 5px 0;">199 MT HOJE</div>
       </div>
 
       <div class="whatsapp-section" style="margin-bottom: 15px;">
@@ -144,7 +177,12 @@
         </button>
       </div>
 
-      <p style="font-size: 0.85rem; color: #666; margin-bottom: 12px;">Acesso imediato após confirmação</p>
+      <div style="background: #ecfdf5; padding: 12px; border-radius: 10px; margin-bottom: 12px; border: 1px solid #a7f3d0;">
+        <p style="font-size: 0.9rem; color: #065f46; margin: 0; font-weight: 600;">
+          ✅ Receba em menos de 2 minutos no WhatsApp<br>
+          ✅ PDF imediato após pagamento
+        </p>
+      </div>
       
       <div class="guarantee-badge" style="padding: 12px;">
         <div class="guarantee-icon">✅</div>
@@ -155,32 +193,13 @@
       </div>
     </div>
 
-    <div class="card testimonials">
-      <div class="testimonial">
-        <img src="Provasocial1.jpg" alt="Prova Social WhatsApp 1" class="img-proof" style="width: 100%; max-width: 100%;" />
-      </div>
-
-      <div class="testimonial">
-        <p>
-          “Recebi tudo no WhatsApp imediatamente após o pagamento.”
-        </p>
-        <strong>— Julieta S.</strong>
-      </div>
-
-      <div class="testimonial">
-        <p>
-          “Explicação simples e fácil de entender.”
-        </p>
-        <strong>— Ernesto P.</strong>
-      </div>
-    </div>
     <div class="card">
       <h2>Perguntas Frequentes</h2>
 
       <div class="faq-item">
-        <div class="faq-question">Como recebo a receita?</div>
+        <div class="faq-question">Como recebo o ebook?</div>
         <div class="faq-answer">
-          A receita é enviada directamente pelo WhatsApp após a confirmação do pagamento.
+          O ebook é enviado directamente pelo WhatsApp após a confirmação do pagamento.
         </div>
       </div>
 
@@ -192,9 +211,9 @@
       </div>
 
       <div class="faq-item">
-        <div class="faq-question">Os ingredientes são caros?</div>
+        <div class="faq-question">Quando recebo o acesso?</div>
         <div class="faq-answer">
-          Não. Os ingredientes custam aproximadamente 30 MT.
+          Imediatamente após a confirmação do pagamento, você recebe o ebook no WhatsApp.
         </div>
       </div>
     </div>
@@ -203,7 +222,7 @@
 
   <footer>
     <div style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 15px; align-items: center;">
-      <h3 style="color: #065f46; font-size: 1.1rem;">Adquirir a Receita Agora:</h3>
+      <h3 style="color: #065f46; font-size: 1.1rem;">Adquirir o Ebook Agora:</h3>
       <div class="payment-buttons">
          <button onclick="fazerPagamento('emola')" class="btn-payment-icon">
            <img src="emolaIcone.png" alt="Pagar com e-Mola">
@@ -212,7 +231,7 @@
            <img src="mpesaicon.jpeg" alt="Pagar com M-Pesa">
          </button>
        </div>
-      <a href="https://wa.me/258848122402?text=Olá%2C%20tenho%20uma%20dúvida%20sobre%20a%20receita." class="btn-whatsapp-contact">
+      <a href="https://wa.me/258848122402?text=Olá%2C%20tenho%20uma%20dúvida%20sobre%20o%20ebook." class="btn-whatsapp-contact">
         Entre em contacto via WhatsApp
       </a>
     </div>
