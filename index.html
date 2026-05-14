@@ -58,10 +58,7 @@
 
     <div class="card reviews-card">
       <div class="reviews-header">
-        <div class="stars-rating">
-          ⭐⭐⭐⭐⭐
-        </div>
-        <h3>Avaliações dos Clientes</h3>
+                <h3>Avaliações dos Clientes</h3>
       </div>
       <div class="reviews-grid">
         <div class="review-item">
@@ -100,277 +97,60 @@
       </div>
     </div>
 
-    <div id="main-action-card" class="card price-box">
-      <!-- Estado Inicial -->
-      <div id="inicio-fluxo">
-        <div class="hero-badge" style="margin-bottom: 15px;">
-          ⭐ Comece Agora Mesmo
+    <div class="card price-box">
+      <div class="security-badge" style="margin-bottom: 15px;">
+        <span class="lock-icon">🔒</span> COMPRA 100% SEGURA
+      </div>
+      
+      <h2 style="color: #1f2937; margin: 10px 0; font-size: 1.6rem;">Receba a Receita Completa<br><span style="color: #10b981;">Hoje Mesmo!</span></h2>
+      
+      <p style="color: #4b5563; margin-bottom: 15px; font-size: 0.95rem;">Método natural que já ajudou milhares de pessoas.</p>
+      
+      <div class="trust-icons">
+        <div class="trust-item">
+          <span class="trust-emoji">🛡️</span>
+          <span>Pagamento Seguro</span>
         </div>
-        
-        <h2 style="color: #1f2937; font-size: 1.6rem; line-height: 1.2; margin-bottom: 10px;">
-          Receba a Receita Completa<br><span style="color: #10b981;">Hoje Mesmo!</span>
-        </h2>
-        
-        <p style="color: #6b7280; font-size: 0.95rem; margin-bottom: 25px;">
-          Responda algumas perguntas rápidas para personalizarmos a sua experiência.
-        </p>
-        
-        <div class="trust-icons" style="margin-bottom: 25px;">
-          <div class="trust-item">
-            <span class="trust-emoji">🛡️</span>
-            <span>Seguro</span>
-          </div>
-          <div class="trust-item">
-            <span class="trust-emoji">⚡</span>
-            <span>Rápido</span>
-          </div>
-          <div class="trust-item">
-            <span class="trust-emoji">✅</span>
-            <span>Eficaz</span>
-          </div>
+        <div class="trust-item">
+          <span class="trust-emoji">⚡</span>
+          <span>Acesso Imediato</span>
         </div>
+      </div>
+      
+      <div class="price-display" style="margin: 20px 0;">
+        <span class="old-price" style="font-size: 1.1rem; text-decoration: line-through; color: #9ca3af;">500 MT</span>
+        <div class="new-price" style="font-size: 2.8rem; color: #059669; font-weight: 900; margin: 5px 0;">147 MT</div>
+      </div>
 
-        <button onclick="iniciarQuestionario()" class="btn btn-final" style="width: 100%; padding: 18px; font-size: 1.15rem; background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);">
-          🚀 INICIAR AGORA
+      <div class="whatsapp-section" style="margin-bottom: 15px;">
+        <label for="whatsapp-number-final" style="display: block; text-align: left; font-weight: bold; margin-bottom: 6px; color: #333; font-size: 0.95rem;">Insira o número WhatsApp</label>
+        <div class="whatsapp-input-wrapper">
+          <span class="whatsapp-icon">💬</span>
+          <input type="tel" id="whatsapp-number-final" placeholder="84 1234567" style="width: 100%; padding: 11px 15px 11px 42px; border: 2px solid #d1d5db; border-radius: 10px; font-size: 0.95rem; outline: none;">
+        </div>
+      </div>
+
+      <p style="font-weight: bold; color: #333; margin-bottom: 10px; font-size: 0.95rem;">Escolha o método de pagamento</p>
+      
+      <div class="payment-buttons-final" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+        <button onclick="fazerPagamentoDireto('mpesa')" class="payment-btn-final">
+          <img src="mpesaicon.jpeg" alt="M-Pesa">
+          <span>M-PESA</span>
         </button>
         
-        <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 12px;">
-          Demora menos de 1 minuto
-        </p>
+        <button onclick="fazerPagamentoDireto('emola')" class="payment-btn-final">
+          <img src="emolaIcone.png" alt="e-Mola">
+          <span>e-Mola</span>
+        </button>
       </div>
 
-      <!-- Questionário (Inicia Oculto) -->
-      <div id="questionario-fluxo" style="display: none;">
-        <!-- Barra de Progresso -->
-        <div class="progress-header" style="display: none;">
-          <div class="progress-steps">
-            <span id="step-text">Passo 1 de 6</span>
-            <span id="progress-percent">16% concluído</span>
-          </div>
-          <div class="progress-bar">
-            <div id="progress-fill" class="progress-fill" style="width: 16%;"></div>
-          </div>
-        </div>
-
-        <div class="quiz-content">
-          <!-- Pergunta 1 -->
-          <div id="pergunta-1" class="quiz-step">
-            <div class="question-header">
-              <span class="question-tag">⭐ PARA TE AJUDARMOS MELHOR</span>
-              <h2 class="question-title">Você bebe álcool ou fuma?</h2>
-           </div>
-            <div class="modern-quiz-options">
-              <button onclick="proximaPergunta(1, 'Bebo')" class="modern-option">
-                <span class="option-icon">🍺</span>
-                <div class="option-texts">
-                  <span class="option-main">Bebo</span>
-                  <span class="option-sub">Ocasionalmente ou regularmente</span>
-                </div>
-                <span class="option-check">✓</span>
-              </button>
-              <button onclick="proximaPergunta(1, 'Fumo')" class="modern-option">
-                <span class="option-icon">🚬</span>
-                <div class="option-texts">
-                  <span class="option-main">Fumo</span>
-                  <span class="option-sub">Diariamente ou algumas vezes</span>
-                </div>
-                <span class="option-check">✓</span>
-              </button>
-              <button onclick="proximaPergunta(1, 'Os dois')" class="modern-option">
-                <span class="option-icon">⚠️</span>
-                <div class="option-texts">
-                  <span class="option-main">Os dois</span>
-                  <span class="option-sub">Bebo e fumo</span>
-                </div>
-                <span class="option-check">✓</span>
-              </button>
-              <button onclick="proximaPergunta(1, 'É alguém próximo a mim')" class="modern-option">
-                <span class="option-icon">👤</span>
-                <div class="option-texts">
-                  <span class="option-main">É alguém próximo a mim</span>
-                  <span class="option-sub">Quero ajudar outra pessoa</span>
-                </div>
-                <span class="option-check">✓</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Pergunta 2 -->
-          <div id="pergunta-2" class="quiz-step" style="display: none;">
-            <div class="question-header">
-              <span class="question-tag">⭐ PARA TE AJUDARMOS MELHOR</span>
-              <h2 class="question-title">Há quanto tempo isso acontece?</h2>
-                 </div>
-            <div class="modern-quiz-options">
-              <button onclick="proximaPergunta(2, 'Menos de 1 ano')" class="modern-option">
-                <span class="option-icon">⏱️</span>
-                <div class="option-texts">
-                  <span class="option-main">Menos de 1 ano</span>
-                  <span class="option-sub">Problema recente</span>
-                </div>
-                <span class="option-check">✓</span>
-              </button>
-              <button onclick="proximaPergunta(2, '1 a 3 anos')" class="modern-option">
-                <span class="option-icon">📅</span>
-                <div class="option-texts">
-                  <span class="option-main">1 a 3 anos</span>
-                  <span class="option-sub">Já faz algum tempo</span>
-                </div>
-                <span class="option-check">✓</span>
-              </button>
-              <button onclick="proximaPergunta(2, 'Mais de 3 anos')" class="modern-option">
-                <span class="option-icon">⏳</span>
-                <div class="option-texts">
-                  <span class="option-main">Mais de 3 anos</span>
-                  <span class="option-sub">Há vários anos</span>
-                </div>
-                <span class="option-check">✓</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Pergunta 3 -->
-          <div id="pergunta-3" class="quiz-step" style="display: none;">
-            <div class="question-header">
-              <span class="question-tag">⭐ PARA TE AJUDARMOS MELHOR</span>
-              <h2 class="question-title">Já tentou parar antes?</h2>
-            </div>
-            <div class="modern-quiz-options">
-              <button onclick="proximaPergunta(3, 'Sim, mas não consegui')" class="modern-option">
-                <span class="option-icon">💪</span>
-                <div class="option-texts">
-                  <span class="option-main">Sim, mas não consegui</span>
-                  <span class="option-sub">Tentei uma vez</span>
-                </div>
-                <span class="option-check">✓</span>
-              </button>
-              <button onclick="proximaPergunta(3, 'Nunca tentei')" class="modern-option">
-                <span class="option-icon">🤔</span>
-                <div class="option-texts">
-                  <span class="option-main">Nunca tentei</span>
-                  <span class="option-sub">É a primeira vez</span>
-                </div>
-                <span class="option-check">✓</span>
-              </button>
-              <button onclick="proximaPergunta(3, 'Muitas vezes')" class="modern-option">
-                <span class="option-icon">🔄</span>
-                <div class="option-texts">
-                  <span class="option-main">Muitas vezes</span>
-                  <span class="option-sub">Tentei várias vezes</span>
-                </div>
-                <span class="option-check">✓</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Pergunta 4 -->
-          <div id="pergunta-4" class="quiz-step" style="display: none;">
-            <div class="question-header">
-              <span class="question-tag">⭐ PARA TE AJUDARMOS MELHOR</span>
-              <h2 class="question-title">Isso já está a afetar sua saúde, família ou dinheiro?</h2>
-            </div>
-            <div class="modern-quiz-options">
-              <button onclick="proximaPergunta(4, 'Sim, muito')" class="modern-option">
-                <span class="option-icon">🔥</span>
-                <div class="option-texts">
-                  <span class="option-main">Sim, muito</span>
-                  <span class="option-sub">Afetando bastante</span>
-                </div>
-                <span class="option-check">✓</span>
-              </button>
-              <button onclick="proximaPergunta(4, 'Um pouco')" class="modern-option">
-                <span class="option-icon">⚠️</span>
-                <div class="option-texts">
-                  <span class="option-main">Um pouco</span>
-                  <span class="option-sub">Começando a afetar</span>
-                </div>
-                <span class="option-check">✓</span>
-              </button>
-              <button onclick="proximaPergunta(4, 'Ainda não')" class="modern-option">
-                <span class="option-icon">🛡️</span>
-                <div class="option-texts">
-                  <span class="option-main">Ainda não</span>
-                  <span class="option-sub">Quero prevenir</span>
-                </div>
-                <span class="option-check">✓</span>
-              </button>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Rodapé do Questionário -->
-        <div id="quiz-footer" class="quiz-footer">
-          <div class="quiz-security">
-            <span class="security-icon">🛡️</span>
-            <div class="security-texts">
-              <span class="security-title">Seus dados estão seguros</span>
-              <span class="security-sub">Suas informações são confidenciais.</span>
-            </div>
-            <span class="security-lock">🔒</span>
-          </div>
-          <div class="quiz-social-proof">
-            <span class="proof-icon">👥</span>
-            <span>+3.842 pessoas já responderam hoje</span>
-          </div>
-        </div>
-
-        <div id="quiz-resultado" class="quiz-step" style="display: none; text-align: center;">
-          <div class="emotional-result">
-            <p>
-              Pelas suas respostas, já está num nível onde precisa mesmo de ajuda, mantenha a calma.<br>
-              Esta receita foi criada exatamente para esse tipo de situação, Clique no butão abaixo.
-            </p>
-          </div>
-          <button onclick="mostrarPagamento()" class="btn btn-final" style="width: 100%; max-width: 400px; padding: 16px; font-size: 1.1rem; background: linear-gradient(135deg, #10b981, #059669);">Quero a receita agora</button>
-        </div>
-
-       
-      </div>
-
-      <!-- Pagamento (Inicia Oculto) -->
-      <div id="pagamento-fluxo" style="display: none;">
-        <div class="security-badge" style="margin-bottom: 12px;">
-          <span class="lock-icon">🔒</span> COMPRA 100% SEGURA
-        </div>
-        
-        <h2 style="color: #1f2937; margin: 10px 0; font-size: 1.4rem;">Receba a Receita Completa<br><span style="color: #10b981;">Hoje Mesmo!</span></h2>
-        
-        <div class="price-display" style="margin: 15px 0;">
-          <span class="old-price" style="font-size: 1rem; text-decoration: line-through; color: #9ca3af;">500 MT</span>
-          <div class="new-price" style="font-size: 2.5rem; color: #059669; font-weight: 900; margin: 5px 0;">147 MT</div>
-        </div>
-
-        <div class="whatsapp-section" style="margin-bottom: 15px;">
-          <label for="whatsapp-number-final" style="display: block; text-align: left; font-weight: bold; margin-bottom: 6px; color: #333; font-size: 0.95rem;">Insira o número WhatsApp</label>
-          <div class="whatsapp-input-wrapper">
-            <span class="whatsapp-icon">💬</span>
-            <input type="tel" id="whatsapp-number-final" placeholder="84 1234567" style="width: 100%; padding: 11px 15px 11px 42px; border: 2px solid #d1d5db; border-radius: 10px; font-size: 0.95rem; outline: none;">
-          </div>
-        </div>
-
-        <p style="font-weight: bold; color: #333; margin-bottom: 10px; font-size: 0.95rem;">Escolha o método de pagamento</p>
-        
-        <div class="payment-buttons-final" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
-          <button onclick="fazerPagamentoDireto('mpesa')" class="payment-btn-final">
-            <img src="mpesaicon.jpeg" alt="M-Pesa">
-            <span>M-PESA</span>
-          </button>
-          
-          <button onclick="fazerPagamentoDireto('emola')" class="payment-btn-final">
-            <img src="emolaIcone.png" alt="e-Mola">
-            <span>e-Mola</span>
-          </button>
-        </div>
-
-        <p style="font-size: 0.85rem; color: #666; margin-bottom: 12px;">Acesso imediato após confirmação</p>
-        
-        <div class="guarantee-badge" style="padding: 12px;">
-          <div class="guarantee-icon">✅</div>
-          <div class="guarantee-text">
-            <h4 style="font-size: 0.9rem;">Garantia de 7 Dias</h4>
-            <p style="font-size: 0.8rem;">Se não gostar, devolvemos o seu dinheiro.</p>
-          </div>
+      <p style="font-size: 0.85rem; color: #666; margin-bottom: 12px;">Acesso imediato após confirmação</p>
+      
+      <div class="guarantee-badge" style="padding: 12px;">
+        <div class="guarantee-icon">✅</div>
+        <div class="guarantee-text">
+          <h4 style="font-size: 0.9rem;">Garantia de 7 Dias</h4>
+          <p style="font-size: 0.8rem;">Se não gostar, devolvemos o seu dinheiro.</p>
         </div>
       </div>
     </div>
